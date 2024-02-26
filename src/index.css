@@ -1,0 +1,31 @@
+button {
+  padding: 16px 24px;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border: none;
+}
+
+.japanese-input {
+  position: relative;
+}
+
+.japanese-input .suggestions-box {
+  position: absolute;
+  background-color: hsl(0, 0%, 80%);
+  border-radius: 4px;
+  left: 0;
+  right: 0;
+  top: 100%;
+}
+
+.japanese-input .suggestions-box li {
+  padding: 16px;
+  cursor: pointer;
+}
+
+.japanese-input .suggestions-box li:hover {
+  background-color: hsl(0, 0%, 70%);
+}
