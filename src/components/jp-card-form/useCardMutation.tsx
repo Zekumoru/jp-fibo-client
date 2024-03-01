@@ -19,19 +19,22 @@ type CardMutationOptions = {
   formData: FormData;
 };
 
-const createCardMutation: (
+const cardMutation: (
   options: CardMutationOptions
 ) => Promise<IStatusResponse> = async ({ type, formData }) => {
   switch (type) {
     case 'create':
       return (
-        await axios.post('http://localhost:3000/jp-card/create', formData)
+        await axios.post('http://localhost:3000/jp-card/create', formData, {
+          withCredentials: true,
+        })
       ).data;
     case 'update':
       return (
         await axios.post(
           `http://localhost:3000/jp-card/${formData.japanese}/update`,
-          formData
+          formData,
+          { withCredentials: true }
         )
       ).data;
   }
@@ -50,7 +53,7 @@ const useCardMutation = () => {
     CardMutationOptions,
     unknown
   >({
-    mutationFn: createCardMutation,
+    mutationFn: cardMutation,
   });
 
   useEffect(() => {
