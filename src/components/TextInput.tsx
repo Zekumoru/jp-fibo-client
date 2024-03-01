@@ -9,6 +9,7 @@ const TextInput = forwardRef<
   TextInputRef,
   {
     id: string;
+    type?: 'text' | 'password';
     className?: string;
     label: string;
     value: string;
@@ -16,49 +17,54 @@ const TextInput = forwardRef<
     onChange?: (value: string) => void;
     children?: ReactNode;
   }
->(({ id, label, value, onChange, errorMessage, className, children }, ref) => {
-  const inputContainerRef = useRef<HTMLDivElement | null>(null);
-  const inputRef = useRef<HTMLInputElement | null>(null);
+>(
+  (
+    { id, label, type, value, onChange, errorMessage, className, children },
+    ref
+  ) => {
+    const inputContainerRef = useRef<HTMLDivElement | null>(null);
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
-  useImperativeHandle(ref, () => ({
-    get input() {
-      return inputRef.current;
-    },
-    get inputContainer() {
-      return inputContainerRef.current;
-    },
-  }));
+    useImperativeHandle(ref, () => ({
+      get input() {
+        return inputRef.current;
+      },
+      get inputContainer() {
+        return inputContainerRef.current;
+      },
+    }));
 
-  return (
-    <div>
-      <div
-        tabIndex={-1}
-        className={className}
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '4px',
-        }}
-        ref={inputContainerRef}
-      >
-        <label htmlFor={id}>{label}</label>
-        <input
-          id={id}
-          type="text"
-          value={value}
-          onChange={(e) => onChange?.(e.target.value)}
+    return (
+      <div>
+        <div
+          tabIndex={-1}
+          className={className}
           style={{
-            padding: '8px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '4px',
           }}
-          ref={inputRef}
-        />
-        {children}
+          ref={inputContainerRef}
+        >
+          <label htmlFor={id}>{label}</label>
+          <input
+            id={id}
+            type={type ?? 'text'}
+            value={value}
+            onChange={(e) => onChange?.(e.target.value)}
+            style={{
+              padding: '8px',
+            }}
+            ref={inputRef}
+          />
+          {children}
+        </div>
+        {errorMessage && (
+          <p style={{ color: 'red', marginTop: '4px' }}>{errorMessage}</p>
+        )}
       </div>
-      {errorMessage && (
-        <p style={{ color: 'red', marginTop: '4px' }}>{errorMessage}</p>
-      )}
-    </div>
-  );
-});
+    );
+  }
+);
 
 export default TextInput;

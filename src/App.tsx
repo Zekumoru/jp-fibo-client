@@ -1,7 +1,7 @@
-import JPCardForm from './components/jp-card-form/JPCardForm';
+import LoginForm from './components/login-form/LoginForm';
 
 const App = () => {
-  return <JPCardForm />;
+  return <LoginForm />;
 };
 
 export default App;
