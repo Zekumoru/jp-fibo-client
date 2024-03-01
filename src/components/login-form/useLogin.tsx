@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
-import { IStatusResponse } from '../../types/response';
+import { ILoginResponse } from '../../types/response';
 import { IFormLoginError } from '../../types/response-errors';
 import useServerError from '../../hooks/useServerError';
 
@@ -14,7 +14,7 @@ const loginMutation = async (credentials: LoginCredentials) => {
     await axios.post('http://localhost:3000/login', credentials, {
       withCredentials: true,
     })
-  ).data as IStatusResponse;
+  ).data as ILoginResponse;
   return data;
 };
 
@@ -23,7 +23,7 @@ const useLogin = () => {
     data: status,
     error: axiosError,
     mutateAsync: login,
-  } = useMutation<IStatusResponse, AxiosError, LoginCredentials, unknown>({
+  } = useMutation<ILoginResponse, AxiosError, LoginCredentials, unknown>({
     mutationFn: loginMutation,
   });
   const error = useServerError<IFormLoginError>(axiosError);
