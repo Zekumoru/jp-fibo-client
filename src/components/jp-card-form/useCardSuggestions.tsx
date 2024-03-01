@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import IJPCard from '../../types/jp-card';
-import { IStatusResponse } from './types/response';
+import { IStatusResponse } from '../../types/response';
 import axios from 'axios';
 import { useMutation } from '@tanstack/react-query';
 

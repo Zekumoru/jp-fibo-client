@@ -12,3 +12,5 @@ export interface IFormCardError extends IStatusResponse {
     date?: TValidationError;
   };
 }
+
+export interface IFormLoginError extends IStatusResponse {}

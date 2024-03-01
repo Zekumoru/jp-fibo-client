@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
-import { IStatusResponse } from './types/response';
-import { IFormCardError } from './types/response-errors';
-import { useEffect, useState } from 'react';
+import { IStatusResponse } from '../../types/response';
+import { IFormCardError } from '../../types/response-errors';
+import useServerError from '../../hooks/useServerError';
 
 type FormData = {
   japanese: string;
@@ -41,29 +41,15 @@ const cardMutation: (
 };
 
 const useCardMutation = () => {
-  const [error, setError] = useState<IFormCardError>();
   const {
     mutate: mutateCard,
     data: status,
     error: axiosError,
     isPending,
-  } = useMutation<
-    IStatusResponse,
-    AxiosError<IFormCardError>,
-    CardMutationOptions,
-    unknown
-  >({
+  } = useMutation<IStatusResponse, AxiosError, CardMutationOptions, unknown>({
     mutationFn: cardMutation,
   });
-
-  useEffect(() => {
-    if (axiosError && axiosError.response) {
-      const error: IFormCardError = axiosError.response.data;
-      return setError(error);
-    }
-
-    setError(undefined);
-  }, [axiosError]);
+  const error = useServerError<IFormCardError>(axiosError);
 
   return [mutateCard, status, error, isPending] as const;
 };
