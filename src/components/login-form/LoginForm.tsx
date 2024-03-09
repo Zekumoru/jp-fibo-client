@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import TextInput from '../TextInput';
-import useLogin from './useLogin';
+import useLogin from '../../hooks/useLogin';
 import { useLoggedIn } from '../../contexts/LoggedInContext';
 import { useNavigate } from 'react-router-dom';
 import { queryClient } from '../../main';

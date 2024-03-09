@@ -1,8 +1,8 @@
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
-import { ILoginResponse } from '../../types/response';
-import { IFormLoginError } from '../../types/response-errors';
-import useServerError from '../../hooks/useServerError';
+import { ILoginResponse } from '../types/response';
+import { IFormLoginError } from '../types/response-errors';
+import useServerError from './useServerError';
 
 interface LoginCredentials {
   username: string;

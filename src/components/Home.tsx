@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import { useLoggedIn } from '../contexts/LoggedInContext';
+import useLogout from '../hooks/useLogout';
 
 const Home = () => {
+  const [logout] = useLogout();
   const user = useLoggedIn();
 
   return (
@@ -10,6 +12,7 @@ const Home = () => {
         Welcome{user && `, ${user.username}`}!
       </h1>
       {!user && <Link to="/login">Login</Link>}
+      {user && <button onClick={() => logout()}>Logout</button>}
     </div>
   );
 };
