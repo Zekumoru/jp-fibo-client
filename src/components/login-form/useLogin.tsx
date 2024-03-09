@@ -11,7 +11,7 @@ interface LoginCredentials {
 
 const loginMutation = async (credentials: LoginCredentials) => {
   const data = (
-    await axios.post('http://localhost:3000/login', credentials, {
+    await axios.post('http://localhost:3000/user/login', credentials, {
       withCredentials: true,
     })
   ).data as ILoginResponse;

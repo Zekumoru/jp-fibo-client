@@ -15,7 +15,7 @@ const LoggedInProvider = ({ children }: { children: ReactNode }) => {
   const { data: user } = useQuery<unknown, AxiosError, IUser>({
     queryFn: async () => {
       const data = (
-        await axios.get('http://localhost:3000/login', {
+        await axios.get('http://localhost:3000/user/login', {
           withCredentials: true,
         })
       ).data as ILoginResponse;
